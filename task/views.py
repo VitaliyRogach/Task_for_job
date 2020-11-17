@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import generics, status
 from .models import Worker, Company
-from .serializers import WorkerSerializer, CompanySerializer
+from .serializers import WorkerSerializer, CompanySerializer, AllInfSerializer
 from rest_framework.permissions import IsAdminUser
 from django.http import Http404
 from django.http import HttpResponseRedirect
@@ -16,7 +16,8 @@ class WorkersView(generics.ListCreateAPIView):
     serializer_class = WorkerSerializer
     permission_classes = [IsAdminUser]
 
-    def list(self, request):
+
+    def worker_list(self, request):
         queryset = self.get_queryset()
         serializer = WorkerSerializer(queryset, many=True)
         return Response(serializer.data)
@@ -26,7 +27,7 @@ class WorkersView(generics.ListCreateAPIView):
             Worker.objects.filter(worker_position='Junior Python-Developer').delete()
             return HttpResponseRedirect("http://127.0.0.1:8000/api/workers/")
         except:
-            return Response(list, status=status.HTTP_404_NOT_FOUND)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class CompanyView(generics.ListCreateAPIView):
@@ -34,8 +35,34 @@ class CompanyView(generics.ListCreateAPIView):
     serializer_class = CompanySerializer
     permission_classes = [IsAdminUser]
 
-    def list(self, request):
+    def company_list(self, request):
         queryset = self.get_queryset()
         serializer = CompanySerializer(queryset, many=True)
         return Response(serializer.data)
 
+# class AllInfView(generics.ListCreateAPIView):
+#     def get(self, request, *args, **kwargs):
+#         filters = {}
+#         filters['model_1'] = Company.objects.all()
+#         filters['model_2'] = Worker.objects.all()
+#         serializer = AllInfSerializer(filters)
+#         return Response(serializer.data)
+
+# class AllInformationView(generics.ListCreateAPIView):
+#     def querry(self, request):
+#         workerSet = WorkerSerializer(Worker.objects.all())
+#         companySet = CompanySerializer(Company.objects.all())
+#         workerList = {}
+#         companyList = {}
+#         workerList = {
+#                 "worker": [workerSet.data],
+#         }
+#         companyList = {
+#                 "company": [companySet.data],
+#         }
+#         list={
+#             "worker": [workerSet.data],
+#             "company": [companySet.data]
+#         }
+#
+#         return Response(list)

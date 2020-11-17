@@ -15,3 +15,7 @@ class CompanySerializer(serializers.Serializer):
 
     def create(self, validated_data):
         return Company.objects.create(**validated_data)
+
+# class AllInfSerializer(serializers.Serializer):
+#     model_2 = WorkerSerializer(read_only=True, many=True)
+#     model_1 = CompanySerializer(read_only=True)

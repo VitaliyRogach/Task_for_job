@@ -7,5 +7,5 @@ app_name = "workers"
 urlpatterns = [
     path('workers/', WorkersView.as_view()),
     path('company/', CompanyView.as_view()),
-
+    # path('all/', AllInfView.as_view()),
 ]
