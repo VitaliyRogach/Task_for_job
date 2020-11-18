@@ -1,11 +1,10 @@
 from rest_framework.response import Response
 from rest_framework import generics, status
 from .models import Worker, Company
-from .serializers import WorkerSerializer, CompanySerializer, AllInfSerializer
+from .serializers import WorkerSerializer, CompanySerializer
 from rest_framework.permissions import IsAdminUser
-from django.http import Http404
-from django.http import HttpResponseRedirect
-from django.http import HttpResponseNotFound
+from django.http import Http404, HttpResponseRedirect, HttpResponseNotFound
+
 
 
 
@@ -41,12 +40,16 @@ class CompanyView(generics.ListCreateAPIView):
         return Response(serializer.data)
 
 # class AllInfView(generics.ListCreateAPIView):
+#
+#     serializer_class = AllInfSerializer
+#
 #     def get(self, request, *args, **kwargs):
 #         filters = {}
 #         filters['model_1'] = Company.objects.all()
 #         filters['model_2'] = Worker.objects.all()
 #         serializer = AllInfSerializer(filters)
 #         return Response(serializer.data)
+
 
 # class AllInformationView(generics.ListCreateAPIView):
 #     def querry(self, request):

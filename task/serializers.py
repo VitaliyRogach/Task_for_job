@@ -11,6 +11,7 @@ class WorkerSerializer(serializers.Serializer):
 
 
 class CompanySerializer(serializers.Serializer):
+
     company_name = serializers.CharField(max_length=120)
 
     def create(self, validated_data):
@@ -19,3 +20,6 @@ class CompanySerializer(serializers.Serializer):
 # class AllInfSerializer(serializers.Serializer):
 #     model_2 = WorkerSerializer(read_only=True, many=True)
 #     model_1 = CompanySerializer(read_only=True)
+#
+#     def create(self, validated_data):
+#         return Company.objects.create(**validated_data)

@@ -15,6 +15,6 @@ class Worker(models.Model):
     worker_name = models.CharField('Имя', max_length=128)
     worker_position = models.TextField('Занимаемая должность', blank=True, null=True)
     worker_age = models.CharField('Возраст', max_length=3)
-
+    name_company = models.ForeignKey(Company, on_delete=models.CASCADE)
     def __str__(self):
         return self.worker_name
