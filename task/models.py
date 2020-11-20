@@ -13,8 +13,8 @@ class Company(models.Model):
 class Worker(models.Model):
     # Information about worker
     worker_name = models.CharField('Имя', max_length=128)
-    worker_position = models.TextField('Занимаемая должность', blank=True, null=True)
+    worker_position = models.TextField('Занимаемая должность', null=True)
     worker_age = models.CharField('Возраст', max_length=3)
-    name_company = models.ForeignKey(Company, on_delete=models.CASCADE)
+   # name_company = models.ManyToOneRel(Company,blank=True)
     def __str__(self):
         return self.worker_name
